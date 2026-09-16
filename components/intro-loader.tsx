@@ -1,7 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+
+/** Sprite com 4 poses da corrida, animado via background-position para simular o movimento das patinhas. */
+const SPRITE_FRAME_SIZE = 128
+const SPRITE_SCALE = 0.72
 
 const LOADING_DURATION_MS = 10000
 
@@ -62,13 +65,18 @@ export function IntroLoader({ children }: { children: React.ReactNode }) {
         <div className="relative flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
           <div className="absolute inset-0 rounded-full border-4 border-dashed border-primary/40 animate-wheel-spin" />
           <div className="relative z-10 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full bg-background shadow-lg sm:h-36 sm:w-36">
-            <Image
-              src="/images/hamster.png"
-              alt="Hamster fofo correndo em uma rodinha"
-              width={200}
-              height={200}
-              priority
-              className="h-full w-full scale-125 object-contain animate-hamster-run"
+            <div
+              role="img"
+              aria-label="Hamster fofo correndo em uma rodinha"
+              className="animate-hamster-sprite-run"
+              style={{
+                width: SPRITE_FRAME_SIZE,
+                height: SPRITE_FRAME_SIZE,
+                backgroundImage: "url('/images/hamster-sprite.png')",
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: `${1024 * SPRITE_SCALE}px ${1024 * SPRITE_SCALE}px`,
+                backgroundPositionY: -303,
+              }}
             />
           </div>
         </div>
